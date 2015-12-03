@@ -20,7 +20,7 @@ resources:
       min_size: 1
       max_size: 3
       resource:
-        type: lb_server.yaml
+        type: https://raw.githubusercontent.com/purandarrao/heat_templates/master/lb_server.yaml
         properties:
           flavor: {get_param: flavor}
           image: {get_param: image}
