@@ -1,0 +1,20 @@
+heat_template_version: 2013-05-23
+description: A load-balancer server
+parameters:
+  image:
+    type: string
+    description: Image used for servers
+  flavor:
+    type: string
+    description: flavor used by the servers
+  network:
+    type: string
+    description: Network used by the server
+
+resources:
+  server:
+    type: OS::Nova::Server
+    properties:
+      flavor: {get_param: flavor}
+      image: {get_param: image}
+      networks: [{network: {get_param: network} }]
