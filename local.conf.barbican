@@ -1,0 +1,65 @@
+[[local|localrc]]
+
+RECLONE=False
+OVN_BRANCH=master
+
+# Load the external LBaaS plugin.
+enable_plugin neutron-lbaas https://git.openstack.org/openstack/neutron-lbaas
+enable_plugin octavia https://git.openstack.org/openstack/octavia
+
+enable_plugin neutron-lbaas-dashboard https://git.openstack.org/openstack/neutron-lbaas-dashboard
+enable_plugin networking-ovn http://git.openstack.org/openstack/networking-ovn
+enable_plugin barbican https://git.openstack.org/openstack/barbican
+
+ADMIN_PASSWORD=123456
+DATABASE_PASSWORD=123456
+RABBIT_PASSWORD=123456
+SERVICE_PASSWORD=$ADMIN_PASSWORD
+SERVICE_TOKEN=123456
+
+HOST_IP=192.168.33.102
+
+enable_service rabbit
+enable_service mysql
+enable_service key
+
+# This is to keep the token small for testing
+KEYSTONE_TOKEN_FORMAT=UUID
+
+enable_service horizon
+enable_service n-api
+enable_service n-cpu
+enable_service n-cond
+enable_service n-sch
+enable_service n-crt
+enable_service n-novnc
+enable_service n-cauth
+disable_service n-net
+
+enable_service g-api
+enable_service g-reg
+
+enable_service q-svc
+enable_service q-dhcp
+enable_service q-meta
+
+disable_service q-agt
+disable_service q-l3
+enable_service ovn-northd
+enable_service ovn-controller
+ENABLE_ISOLATED_METADATA=True
+
+# Enable LBaaS v2
+enable_service q-lbaasv2
+enable_service octavia
+enable_service o-cw
+enable_service o-hk
+enable_service o-hm
+enable_service o-api
+
+IMAGE_URLS+=",http://download.cirros-cloud.net/0.3.4/cirros-0.3.4-x86_64-disk.img"
+
+disable_service c-api
+disable_service c-vol
+disable_service c-sch
+disable_service tempest
